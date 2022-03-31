@@ -10,7 +10,7 @@ import {
     Button,
 } from '@chakra-ui/react';
 
-const ItemCard = ({ item }) => {
+const DragonCard = ({ dragon }) => {
     const [isOpen, setIsOpen] = useState(true);
 
     return (
@@ -20,7 +20,7 @@ const ItemCard = ({ item }) => {
                 p={6}
                 display={'flex'}
                 justifyContent={'space-between'}
-                maxW={isOpen ? ('330px') : ('75%')}
+                maxW={isOpen ? ('330px') : ('800px')}
                 w={'full'}
                 bg={'gray.700'}
                 boxShadow={'2xl'}
@@ -53,7 +53,7 @@ const ItemCard = ({ item }) => {
                             pos: 'absolute',
                             top: 5,
                             left: 0,
-                            backgroundImage: `url(${item.flickr_images[0]})`,
+                            backgroundImage: `url(${dragon.flickr_images[0]})`,
                             filter: 'blur(15px)',
                             zIndex: -1,
                         }}
@@ -67,19 +67,19 @@ const ItemCard = ({ item }) => {
                             height={230}
                             width={282}
                             objectFit={'cover'}
-                            src={item.flickr_images[0]}
+                            src={dragon.flickr_images[0]}
                         />
                     </Box>
                     <Stack pt={10} align={'center'}>
                         <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-                            {item.type}
+                            {dragon.type}
                         </Text>
                         <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-                            {item.name}
+                            {dragon.name}
                         </Heading>
                         <Stack direction={'row'} align={'center'}>
-                            <Text fontWeight={800} fontSize={'xl'}>
-                                {item.cost_per_launch} $
+                            <Text fontWeight={400} fontSize={'md'} maxHeight={'200px'} overflowY={'auto'}>
+                                Capacity : {dragon.crew_capacity} people
                             </Text>
                         </Stack>
                     </Stack>
@@ -97,16 +97,16 @@ const ItemCard = ({ item }) => {
                                 Technical datas
                             </Text>
                             <Text fontWeight={400} fontSize={'md'}>
-                                Height : {item.height.meters} meters <br />
-                                Diameter : {item.diameter.meters} meters <br />
-                                Mass : {item.mass.kg} kgs <br />
-                                Engine(s) : {item.engines.layout} {item.engines.type} {item.engines.version} <br />
+                                Height : {dragon.height_w_trunk.meters} meters <br />
+                                Diameter : {dragon.diameter.meters} meters <br />
+                                Mass : {dragon.dry_mass_kg} kgs <br />
+                                Heat shield material : {dragon.heat_shield.material} <br />
                             </Text>
-                            <Text fontWeight={200} fontSize={'sm'} color={item.success_rate_pct < 50 ? ('red.400') : 'green.400'}>
-                                Success rate : {item.success_rate_pct} %
+                            <Text fontWeight={200} fontSize={'sm'}>
+                                {dragon.description}
                             </Text>
                         </Stack>
-                        <Button colorScheme='blue' >Book this rocket</Button>
+                        <Button colorScheme='blue' >Book this dragon</Button>
                     </Box>
                 )}
             </Box>
@@ -115,4 +115,4 @@ const ItemCard = ({ item }) => {
     );
 }
 
-export default ItemCard;
+export default DragonCard;

@@ -18,9 +18,12 @@ export default function App() {
             <Head />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path='/booking/rockets' element={<Booking category={'rockets'} />} />
+                <Route path='/booking/dragons' element={<Booking category={'dragons'} />} />
+                <Route path='/booking/launchpads' element={<Booking category={'launchpads'} />} />
+                <Route path='/booking/ships' element={<Booking category={'ships'} />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/booking" element={<Booking />} />
             </Routes>
         </BrowserRouter >
     );
