@@ -5,12 +5,11 @@ import PadCard from "../components/PadCard";
 
 export default function Booking({ category }) {
     const [itemData, setItemData] = useState();
-
+   
     useEffect(() => {
         fetch(`https://api.spacexdata.com/v4/${category}`)
             .then(res => res.json())
             .then(data => setItemData(data))
-            {console.log(itemData)}
     }, [category])
 
     return (

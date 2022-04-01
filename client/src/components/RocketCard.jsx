@@ -106,7 +106,10 @@ const RocketCard = ({ rocket }) => {
                                 Success rate : {rocket.success_rate_pct} %
                             </Text>
                         </Stack>
-                        <Button colorScheme='blue' >Book this rocket</Button>
+                        <Button
+                            colorScheme='blue'
+                            // onClick={ }
+                        >Book this rocket</Button>
                     </Box>
                 )}
             </Box>

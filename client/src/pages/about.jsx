@@ -8,20 +8,27 @@ import {
     Heading,
     Text,
     StackDivider,
-    useColorModeValue,
     Stack,
 } from '@chakra-ui/react';
 
 export default function About() {
     const [aboutData, setAboutData] = useState();
+    const [users, setUsers] = useState([]);
+    const [showAll, setShowAll] = useState(false);
+
+    let showUsers = () => {
+        setShowAll(!showAll);
+    }
 
     useEffect(() => {
         fetch("https://api.spacexdata.com/v4/company")
             .then(res => res.json())
             .then(data => setAboutData(data))
-    }, [])
 
-    const color = useColorModeValue('blue.50', 'blue.900');
+        fetch(`http://localhost:3001/about`)
+            .then(res => res.json())
+            .then(data => setUsers(data))
+    }, [])
 
     return (
         <>
@@ -61,6 +68,15 @@ export default function About() {
                                     <Text fontWeight={600}>Launch sites : {aboutData.launch_sites}</Text>
                                     <Text fontWeight={600}>Test sites : {aboutData.test_sites}</Text>
                                     <Text fontWeight={600}>Vehicles : {aboutData.vehicles}</Text>
+
+                                    <button onClick={showUsers}>Show User</button>
+
+                                    {showAll ? users.data.map((user, i) =>
+                                        <div key={i}>
+                                            <p>{user.firstName}</p>
+                                            <p>{user.lastName}</p>
+                                        </div>
+                                    ) : null}
                                 </Stack>
                             </Flex>
                         </Stack>
@@ -80,28 +96,3 @@ export default function About() {
         </>
     )
 }
-
-
-
-/* <div className="about">About the compagny</div>
-{
-    (typeof aboutData === 'undefined') ? (
-        <p>Loading...</p>
-    ) : (
-    <div>
-        <h1>The compagny</h1>
-        <h2>{aboutData.name}</h2>
-        <p>{aboutData.summary}</p>
-        <p>CEO : {aboutData.founder}</p>
-        <h3>{aboutData.name} in numbers</h3>
-        <p>Founded in : {aboutData.founded}</p>
-        <p>Employees : {aboutData.employees}</p>
-        <p>Valuation : {aboutData.valuation} $</p>
-        <p>Launch sites : {aboutData.launch_sites}</p>
-        <p>Test sites : {aboutData.test_sites}</p>
-        <p>Vehicles : {aboutData.vehicles}</p>
-    </div>
-)
-}
-        </>
-    ); */
